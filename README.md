@@ -161,6 +161,95 @@ export TRAE_MCP_SERVERS='{"llms-txt-generator": {"command": "python3", "args": [
 
 在Claude Desktop的设置中添加MCP服务器配置。
 
+## 🎯 实现机制
+
+### 🔧 系统架构拓扑图
+
+```mermaid
+graph TB
+    subgraph "MCP 客户端 (IDE/AI助手)"
+        A[Trae AI IDE] -->|MCP协议| B[LLMS.TXT MCP Server]
+        C[Cursor Editor] -->|MCP协议| B
+        D[Claude Desktop] -->|MCP协议| B
+    end
+    
+    subgraph "LLMS.TXT MCP 服务器"
+        B --> E[generate_llms_tool<br/>生成工具]
+        B --> F[get_project_info_tool<br/>信息查询工具]
+        B --> G[list_projects_tool<br/>项目发现工具]
+        
+        E --> H[detect_project_type<br/>项目类型检测]
+        F --> H
+        G --> H
+        
+        H --> I[文件系统扫描<br/>package.json, requirements.txt等]
+        
+        E --> J[generate_llms_content<br/>内容生成]
+        J --> K[文件写入<br/>llms.txt]
+    end
+    
+    subgraph "目标项目"
+        I --> L[Node.js项目<br/>package.json]
+        I --> M[Python项目<br/>requirements.txt]
+        I --> N[Go项目<br/>go.mod]
+        I --> O[Rust项目<br/>Cargo.toml]
+        I --> P[Web项目<br/>index.html]
+        
+        K --> Q[生成的llms.txt文件]
+    end
+    
+    subgraph "输出结果"
+        Q --> R[标准化的项目文档]
+        R --> S[AI助手更好的<br/>项目理解]
+        R --> T[减少Token使用<br/>优化上下文]
+        R --> U[更准确的<br/>代码生成]
+    end
+```
+
+### ⏱️ 工作流程时序图
+
+```mermaid
+sequenceDiagram
+    participant User as 用户/AI助手
+    participant IDE as IDE客户端
+    participant Server as LLMS.TXT MCP服务器
+    participant FS as 文件系统
+    
+    User->>IDE: 请求生成llms.txt
+    IDE->>Server: MCP调用 generate_llms_tool()
+    
+    activate Server
+    Server->>FS: 扫描项目目录
+    FS-->>Server: 返回文件结构
+    
+    Server->>Server: detect_project_type()
+    Note over Server: 检测项目类型<br/>(Node.js/Python/Go/Rust/Web)
+    
+    Server->>Server: get_project_info()
+    Note over Server: 收集核心文件信息<br/>(README, package.json等)
+    
+    Server->>Server: generate_llms_content()
+    Note over Server: 生成标准化内容
+    
+    Server->>FS: 写入llms.txt文件
+    FS-->>Server: 写入成功
+    
+    Server-->>IDE: 返回生成结果
+    deactivate Server
+    
+    IDE-->>User: 显示生成成功信息
+    
+    Note over User,IDE: AI助手现在可以<br/>更好地理解项目结构
+```
+
+### 🔍 核心组件说明
+
+1. **MCP协议层**: 基于Model Context Protocol标准，提供与各种IDE/AI助手的兼容性
+2. **项目检测引擎**: 自动识别项目类型和技术栈
+3. **文件扫描器**: 智能识别核心项目文件和目录结构
+4. **内容生成器**: 根据项目信息生成标准化的llms.txt文档
+5. **错误处理机制**: 完善的权限管理和异常处理
+
 ## 🎯 使用方法
 
 ### 🤖 Trae AI IDE 专属使用
