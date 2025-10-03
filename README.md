@@ -5,7 +5,7 @@
 [![Trae AI IDE](https://img.shields.io/badge/Trae-AI%20IDE-purple)](https://trae.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **LLMS.TXT MCP 服务器** 是一个基于MCP协议的本地服务器，用于自动为Web项目生成标准化的llms.txt文档。 https://github.com/AnswerDotAI/llms-txt
+> **LLMS.TXT MCP 服务器** 是一个基于MCP协议的本地服务器，用于自动为Web项目生成标准化的llms.txt文档。 
 
 
 ## 📖 什么是 LLMS.TXT？
