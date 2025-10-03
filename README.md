@@ -5,7 +5,7 @@
 [![Trae AI IDE](https://img.shields.io/badge/Trae-AI%20IDE-purple)](https://trae.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-一个基于MCP协议的本地服务器，用于自动为Web项目生成标准化的llms.txt文档。
+> **LLMS.TXT MCP 服务器** 是一个基于MCP协议的本地服务器，用于自动为Web项目生成标准化的llms.txt文档。
 
 ## 📖 什么是 LLMS.TXT？
 
@@ -17,7 +17,7 @@
 - 🚀 **快速开始指南** - 如何设置和运行项目
 - 🔗 **相关资源** - 文档、API参考和其他有用链接
 
-LLMS.TXT 帮助AI助手更好地理解项目上下文，提供更准确的代码生成、问题解答和项目分析。
+> **在项目开发过程中，在项目根目录保留一个LLMS.TXT， 有助于AI IDE（Cursor / Claude Code / TRAE等）更好地理解项目上下文，提供更准确的代码生成、问题解答和项目分析。 防止LLM对于项目进行全盘扫描，这可以大幅优化上下文的Token的用量。**
 
 ## 🚀 功能特性
 
