@@ -3,10 +3,10 @@
     "llms-txt-generator": {
       "command": "python3",
       "args": [
-        "/Users/xt/1003_llms.txt/llms_mcp_server.py"
+        "/path/to/llms_mcp_server.py"
       ],
       "env": {
-        "PYTHONPATH": "/Users/xt/1003_llms.txt"
+        "PYTHONPATH": "/path/to/project"
       }
     }
   }
